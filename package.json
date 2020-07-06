@@ -1,0 +1,30 @@
+{
+  "name": "mock",
+  "version": "1.0.0",
+  "description": "日常项目mock 平台",
+  "main": "index.js",
+  "virturlpath":"soproxy",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm run start",
+    "start":"pm2 start application.config.js",
+    "start_prod":"pm2 start application.config.prod.js"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://guxiaoxin@git.innotechx.com/scm/qjp/socketforskinstorm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-multipart": "^0.0.1",
+    "koa-router": "^8.0.8",
+    "koa-static": "^5.0.0",
+    "socket.io": "^2.3.0",
+    "uuid": "^7.0.3"
+  }
+}
