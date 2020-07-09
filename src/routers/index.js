@@ -1,10 +1,15 @@
 module.exports = (router,app)=>{
-   
+    //console.log(router,app)
     let {
-        index 
+        index,
+        user,
+        projects
     } = app.controllers;
     const vpath = "";
     router.get(vpath+'/test',index.start);
+    router.post(vpath+"/pm/login",user.login);
+    router.post(vpath+"/pm/projectinfo",projects.findProject)
+    router.post(vpath+"/pm/addproject",projects.addProject)
     /*router.get(vpath+'/test',index.start);
     router.get(vpath+'/soproxy/test',index.start);
     router.post(vpath+'/upload',index.upload);
@@ -18,5 +23,5 @@ module.exports = (router,app)=>{
     //用户认证
     //mockapi托管
     // api/{MOCKID}/{router}/
-
+    
 }

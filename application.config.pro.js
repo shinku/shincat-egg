@@ -1,17 +1,17 @@
 module.exports  = {
     apps:[
         {
-            "name":"socket_skin_storm_prod",
+            "name":"jdd_mock",
             "script": "src/index.js",
             "instances" : 1,
             "exec_mode" : "cluster",
             "watch":true,
-            "args":["production"],
+            "args":["pro"],
             "env": {
-                "NODE_ENV": "development"
+                "NODE_ENV": "pro"
             },
             "env_production": {
-                "NODE_ENV": "production"
+                "NODE_ENV": "pro"
             },
         }
     ]

@@ -15,4 +15,5 @@ class publiccom {
         return this.map.get(name);
     }
 }
+
 module.exports = publiccom.getInstance();

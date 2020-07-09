@@ -1,30 +1,22 @@
 const Router = require('koa-router');
 const Controller = require('../core/controller');
+const buildPreams = (path,...params)=>{
+    return [path].concat(params);
+}
 class ARouter {
     constructor(app){
         this.app = app;
         this.router = new Router();
     }
     get(path,...params){
-        let _self = this;
-        //  console.log(Router.prototype.get.apply);
-        //this.router.get(path,...params);
-        
-        Router.prototype.get.apply(this.router,[path].concat(params.map(_item=>{
-            return (context,next)=>{
-                //console.log.(item _instance Controller)
-                _item.call(_self,context,next);
-            }
-        })));
+        Router.prototype.get.apply(this.router,buildPreams(path,...params));
     }
     post(path,...params){
-        let _self = this;
-        Router.prototype.post.apply(this.router,[path].concat(params.map(_item=>{
-            return (context,next)=>{
-                _item.call(_self,context,next);
-                //await next();
-            }
-        })));
+       
+        Router.prototype.post.apply(this.router,buildPreams(path,...params));
+    }
+    all(path,...params){
+        Router.prototype.all.apply(this.router,buildPreams(path,...params));
     }
    
 }

@@ -1,6 +1,3 @@
-process.getRoot=()=>{
-    return __dirname
-}
+process.getRoot=()=>(__dirname)
 let APP = require('./core/application');
-//console.log(process.argv);
-console.log("NODE_ENV",process.env.NODE_ENV);  
+//console.log("NODE_ENV",process.env.NODE_ENV);  

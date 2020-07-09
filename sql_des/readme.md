@@ -13,10 +13,11 @@ porjects 表
 | projectid  | string |
 
 project_user 表
+用户项目表
 |  字段   | 类型  |
 |  - | -  |
 | id  | 自增ID |
-| userid  | 自增ID |
+| userid  | 用户ID |
 | projectid  | string |
 
 interface_project 表
@@ -28,6 +29,7 @@ interface_project 表
 | apiurl | string | API 地址 |
 | method | string |GET/POST/PUT/DELETE|
 |response|long|返回内容长字符串|
+|description|long|接口描述|
 
 params_interface 表
 用于关联 字段和接口

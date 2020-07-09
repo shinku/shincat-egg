@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "日常项目mock 平台",
   "main": "index.js",
-  "virturlpath":"soproxy",
+  "virturlpath": "soproxy",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run start",
-    "start":"pm2 start application.config.js",
-    "start_prod":"pm2 start application.config.prod.js"
-
+    "start": "pm2 start application.config.js",
+    "start_prod": "pm2 start application.config.pro.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +23,9 @@
     "koa-multipart": "^0.0.1",
     "koa-router": "^8.0.8",
     "koa-static": "^5.0.0",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.0",
     "socket.io": "^2.3.0",
-    "uuid": "^7.0.3"
+    "uuid": "^8.2.0"
   }
 }

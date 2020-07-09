@@ -1,0 +1,14 @@
+{
+  "paths":{
+    "controller":"controller",
+    "coreplugins":"core/plugins",
+    "hooks":"core/hooks/index.js",
+    "middleware":"middleware",
+    "config":"config",
+    "modules":"modules",
+    "plugins":"plugins",
+    "routers":"routers/index.js"
+  }
+  
+  
+}

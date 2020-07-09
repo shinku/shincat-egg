@@ -1,13 +1,12 @@
 
-/*let Router = require('koa-router');
+let Router = require('koa-router');
 let bodyparse = require('koa-bodyparser') ;
 let static = require('koa-static');
 const koaBody = require('koa-body');
-let Makerouter = require('../core/corerouter');
+let Makerouter = require('../corerouter');
 let path = require('path');
 module.exports = (application)=>{
     let {config,server} = application;
-   
     server.use(koaBody({
         multipart: true,
         formidable: {
@@ -20,7 +19,4 @@ module.exports = (application)=>{
 
     }));
     server.use(Makerouter(application));
-}*/
-module.exports = ()=>{
-    
 }
