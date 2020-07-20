@@ -9,6 +9,4 @@
     "plugins":"plugins",
     "routers":"routers/index.js"
   }
-  
-  
 }

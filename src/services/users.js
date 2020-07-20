@@ -1,3 +1,4 @@
+const {v4 : uuid4}  =require('uuid'); 
 const ADbService = require("../core/ADbService");
 
 class users extends ADbService{
@@ -9,7 +10,7 @@ class users extends ADbService{
     login(username,pwd){
         //passwrod 需要进行一次安全加密
         return this.table.find({
-            attributes:['userid'],
+            attributes:['userid',"userlisence",'username'],
             where:{
                 username,
                 pwd
@@ -17,9 +18,15 @@ class users extends ADbService{
         });
     }
     //注册
-    async register()
+    async register(username,pwd,userlisence)
     {
-
+        let userid = uuid4();
+        return this.table.create({
+            userid,
+            username,
+            pwd,
+            userlisence
+        })
     }
     //判断是否存在账户
     checkAvriable(username){

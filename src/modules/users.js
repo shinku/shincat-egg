@@ -19,6 +19,9 @@ class users extends SequelizeOperate{
             },
             pwd:{
                 type:DataTypes.STRING,
+            },
+            userlisence:{
+                type:DataTypes.INTEGER
             }
         });
         this.sync({force:false}).then(_res=>{

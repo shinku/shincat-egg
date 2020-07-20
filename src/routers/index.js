@@ -3,13 +3,18 @@ module.exports = (router,app)=>{
     let {
         index,
         user,
-        projects
+        projects,
+        report
     } = app.controllers;
     const vpath = "";
     router.get(vpath+'/test',index.start);
     router.post(vpath+"/pm/login",user.login);
+    router.post(vpath+"/pm/logout",user.logout);
+    router.post(vpath+"/pm/addaccount",user.addaccount);
     router.post(vpath+"/pm/projectinfo",projects.findProject)
-    router.post(vpath+"/pm/addproject",projects.addProject)
+    router.post(vpath+"/pm/addproject",projects.addProject);
+    router.post(vpath+"/report/errormini",report.reportMini);
+    router.post(vpath+"/report/errormini/get",report.getReportMini);
     /*router.get(vpath+'/test',index.start);
     router.get(vpath+'/soproxy/test',index.start);
     router.post(vpath+'/upload',index.upload);

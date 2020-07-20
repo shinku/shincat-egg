@@ -13,9 +13,11 @@ class Projects extends Controller{
     }
     
     async addProject(){
+        
         const {
             projectname,
-            userid
+            userid,
+            projecttype,
         } = this.request.body;
         let projectid = uuid4();
         //获取sequelize 初始化的实例
@@ -32,7 +34,11 @@ class Projects extends Controller{
             await project_users.insert({projectid,userid},{transaction});
             //提交事务
             await transaction.commit();
-            this.send(1);
+            this.send({
+                code:1,
+                msg:'done',
+                data:{}
+            });
 
         }catch(e){
             //报错，事务回滚

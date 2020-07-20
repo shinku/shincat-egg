@@ -21,6 +21,6 @@ module.exports = (application)=>{
     }));
     server.use(Makerouter(application));
 }*/
-module.exports = ()=>{
-    
+module.exports = async (ctx,next)=>{
+    await next();
 }

@@ -20,10 +20,18 @@ module.exports = (application)=>{
     let coremiddlewares = loadMiddleWare('core/middleware');
     //项目中间件目录
     let projecrMiddleWare = loadMiddleWare('middleware');
+    let {server} = application;
+    projecrMiddleWare.forEach(_item=>{
+        
+        server.use(_item)
+    })
     coremiddlewares.forEach(_item=>{
         //console.log({_item});
-        _item.call(null,application)
-    })
+        if(_item) _item.call(null,application);
+    });
+    
+   
+   
     return {
         coremiddlewares,
         projecrMiddleWare
