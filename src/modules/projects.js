@@ -16,16 +16,18 @@ class projects extends SequelizeOperate{
             },
             projectname:{
                 type:DataTypes.STRING,
+            },
+            projecttype:{
+                type:DataTypes.INTEGER,
+            },
+            projectdesc:{
+                type:DataTypes.TEXT
+            },
+            isdel:{
+                type:DataTypes.INTEGER
             }
         });
-        this.sync({force:false}).then(_res=>{
-            console.log({
-                _res
-            });
-            
-        })
+        this.sync({force:false}).then(_res=>{})
     }
-
-    
 }
 module.exports = projects

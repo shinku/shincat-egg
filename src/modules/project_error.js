@@ -55,10 +55,6 @@ class project_error extends SequelizeOperate{
             }
         });
         this.sync({force:false}).then(_res=>{
-            console.log({
-                _res
-            });
-            
         })
     }
 

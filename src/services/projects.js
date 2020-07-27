@@ -6,12 +6,19 @@ class Projects extends ADbService{
         this.tableName = 'projects';
     }
     //登录
-    addProject({projectid,projectname},...params){
+    addProject(values,...params){
         //
        
         return this.table.create({
-            projectid,
-            projectname,
+           ...values
+        },...params);
+
+    }
+    updateProject(values,...params){
+        //
+       
+        return this.table.update({
+           ...values
         },...params);
 
     }
@@ -23,7 +30,5 @@ class Projects extends ADbService{
             }
         })
     }
-
-    
 }
 module.exports = Projects;

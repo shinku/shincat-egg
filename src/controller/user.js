@@ -14,7 +14,13 @@ class usercontroller extends Controller {
         let {context} = this;
         try{
             let result = await this.services.users.login(username,pwd);
+            //console.log(context.cookies.set);
+            context.cookies.set("userid_remote",result[0].userid,{
+                httpOnly:true,
+                maxAge:60*60*1000*24
+            });
             if(result.length > 0){
+                
                 this.send({
                     code:1,
                     data:{
@@ -32,7 +38,11 @@ class usercontroller extends Controller {
                 })
             }
         }catch(e){
-            this.send(e);
+            this.send({
+                code:0,
+                data:null,
+                msg:e.toString()
+            })
         }
     }
     async addaccount (){
@@ -55,10 +65,11 @@ class usercontroller extends Controller {
     }
     async logout(){
         const {context} = this; 
-        
-        context.cookies.set('userid',null,removeOption);
-        context.cookies.set('username',null,removeOption);
-        context.cookies.set('userlisence',null,removeOption);
+        //cookie 中清除用户数据
+        context.cookies.set("userid_remote","null",{
+            httpOnly:true,
+            maxAge:-60*60*1000*24
+        });
         this.send({
             code:1,
             data:null,

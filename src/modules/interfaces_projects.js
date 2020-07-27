@@ -20,23 +20,24 @@ class interfaces_projects extends SequelizeOperate{
             url:{
                 type:DataTypes.STRING,
             },
-            metod:{
+            method:{
                 type:DataTypes.STRING,
             },
             response:{
                 type:DataTypes.TEXT,
             },
+            contenttype:{
+                type:DataTypes.STRING,
+            },
             description:{
                 type:DataTypes.TEXT,
+            },
+            isdel:{
+                type:DataTypes.INTEGER
             }
 
         });
-        this.sync({force:false}).then(_res=>{
-            console.log({
-                _res
-            });
-            
-        })
+        this.sync({force:false}).then(_res=>{})
     }
 
     

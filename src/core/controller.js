@@ -33,6 +33,7 @@ class Controller extends base{
     get services(){
         return this.app.services;
     }
+    
     //获取插件模块
     get plugins(){
         return this.app.plugins;

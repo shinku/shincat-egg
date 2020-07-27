@@ -10,9 +10,15 @@ module.exports = (router,app)=>{
     router.get(vpath+'/test',index.start);
     router.post(vpath+"/pm/login",user.login);
     router.post(vpath+"/pm/logout",user.logout);
+    router.post(vpath+"/pm/projectlist",projects.list);
+    router.post(vpath+"/pm/projecttypelist",projects.typelist);
     router.post(vpath+"/pm/addaccount",user.addaccount);
-    router.post(vpath+"/pm/projectinfo",projects.findProject)
+    router.post(vpath+"/pm/projectinfo",projects.findProject);
+
     router.post(vpath+"/pm/addproject",projects.addProject);
+    router.post(vpath+"/pm/getmocklist",projects.getmocklist);
+    router.post(vpath+"/pm/getmockdetails",projects.getmockdetails)
+    router.post(vpath+"/pm/addmock",projects.addmock)
     router.post(vpath+"/report/errormini",report.reportMini);
     router.post(vpath+"/report/errormini/get",report.getReportMini);
     /*router.get(vpath+'/test',index.start);

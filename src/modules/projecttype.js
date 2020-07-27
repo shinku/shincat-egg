@@ -1,27 +1,18 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const SequelizeOperate = require('../core/SequelizeOpetate');
 
-class params_interface extends SequelizeOperate{
+class projecttype extends SequelizeOperate{
    
     init(){
-        this.define('params_interface',{
+        this.define('projecttype',{
             id:{
                 type:DataTypes.INTEGER,
                 autoIncrement:true,
                 primaryKey:true,
                 allowNull: false
             },
-            projectid:{
-                type:DataTypes.STRING,
-            },
-            interfaceid:{
-                type:DataTypes.STRING,
-            },
-            name:{
-                type:DataTypes.STRING,
-            },
-            type:{
-                type:DataTypes.STRING,
+            typeid:{
+                type:DataTypes.INTEGER,
             },
             desc:{
                 type:DataTypes.STRING,
@@ -30,9 +21,11 @@ class params_interface extends SequelizeOperate{
                 type:DataTypes.INTEGER
             }
         });
-        this.sync({force:false}).then(_res=>{})
+        this.sync({force:false}).then(_res=>{
+         
+        })
     }
 
     
 }
-module.exports = params_interface
+module.exports = projecttype

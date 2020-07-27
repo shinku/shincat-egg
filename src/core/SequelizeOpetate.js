@@ -10,6 +10,10 @@ class SequelizeOperate {
     init(){
         
     }
+    update(...params){
+        let {_db} = this;
+        return _db.update(...params)
+    }
     define(name,option){
         this ._db = sequeslize.define(name,option);
     }
@@ -32,7 +36,13 @@ class SequelizeOperate {
     }
     count(...params){
         let {_db} = this;
-        return _db.count(...params)
+        return _db.count(...params);
+        /*return _db.findAll({
+            attributes:[
+                [sequeslize.fn('COUNT'),sequeslize.col('id'), 'count']
+            ],
+            ...params
+        })*/
     }
     //执行查询命令
     query(...params){

@@ -10,6 +10,11 @@ class ProjectsWithUser extends ADbService{
             userid,projectid
         },...params)
     }
+    count ({userid}){
+        return this.table.count({
+            where:{userid}
+        });
+    }
     //登录
   
     

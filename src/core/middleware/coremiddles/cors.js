@@ -16,21 +16,23 @@ module.exports =(config)=>{
     }
     getAllowList(config);
     return async (ctx,next)=>{
-        //console.log(ctx);
-        //cconsole.log(2131231231231);
-        await next();
         let host = ctx.request.header.referer;
+        if(host){
+            if(host.lastIndexOf('/')==host.length-1){
+                host = host.substr(0,host.length-1);
+            }
+            console.log({host});
+        }
         if(allowList["*"]){
             host = "*" 
         };
+        //console.log({allowList,host});
         if(allowList[host]==1){
             ctx.set("Access-Control-Allow-Origin",host);
-            ctx.set("Access-Control-Allow-Headers","content-type");
+            ctx.set("Access-Control-Allow-Headers","Content-Type,Cookie,Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild");
             ctx.set("Access-Control-Allow-Methods","DELETE,PUT,POST,GET,OPTIONS");
-            ctx.set('Access-Control-Allow-Credentials',true)
+            ctx.set('Access-Control-Allow-Credentials',"true")
         };
-       
-        
-       
+        await next();
     }
 }

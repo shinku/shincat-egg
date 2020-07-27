@@ -22,6 +22,9 @@ class users extends SequelizeOperate{
             },
             userlisence:{
                 type:DataTypes.INTEGER
+            },
+            isdel:{
+                type:DataTypes.INTEGER
             }
         });
         this.sync({force:false}).then(_res=>{

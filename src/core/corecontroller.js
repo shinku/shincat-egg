@@ -11,10 +11,6 @@ const getController = (app)=>{
         let stat = fs.statSync(path.join(_path,_item));
         if(stat.isFile()) {
             let operateClass = require(path.join(_path,_item));
-            console.log({
-                operateClass,
-                _item
-            })
             try{ 
                 let controler =  new operateClass(app);
                 let propers = Object.getOwnPropertyNames(Object.getPrototypeOf(controler))

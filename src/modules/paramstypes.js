@@ -16,19 +16,7 @@ class paramstypes extends SequelizeOperate{
             },
 
         });
-        this.sync({force:false}).then(_res=>{
-            
-            this.create({
-                paramtype:"string"
-            });
-            this.create({
-                paramtype:"int"
-            });
-            this.create({
-                paramtype:"text"
-            })
-            
-        })
+        this.sync({force:false}).then(_res=>{})
     }
 
     

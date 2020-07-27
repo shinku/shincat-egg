@@ -4,7 +4,7 @@ let config = {
     port:9000,
     socketport:9001,
     cors:{
-        domains:["*"]
+        domains:["http://test.local.com","http://localhost:3000"]
     }
 }
 module.exports  = config;
