@@ -5,7 +5,7 @@ class Projects extends ADbService{
         super(app);
         this.tableName = 'projects';
     }
-    //登录
+    //addProject
     addProject(values,...params){
         //
        
@@ -14,6 +14,7 @@ class Projects extends ADbService{
         },...params);
 
     }
+    
     updateProject(values,...params){
         //
        

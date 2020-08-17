@@ -36,6 +36,17 @@ class users extends ADbService{
             }
         });
     }
+    //删除用户
+    async removeAccount({userid}){
+        return this.table.update({
+            iddel:1
+        },{
+            where:{
+                userid
+            }
+        })
+    }
+
     
 }
 module.exports = users;

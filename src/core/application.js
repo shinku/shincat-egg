@@ -18,9 +18,11 @@ class application {
         //加载controllers
         this.controllers = getController(this);
         //
-        let middlewares = loadMiddleware(this);
         //获取插件
         let {context,applications} = pluginInit(this);
+        //加载中间件
+        let middlewares = loadMiddleware(this);
+       
         this.io = null;
         let commands = process.argv.slice(2);
         for(var val of commands){

@@ -6,16 +6,19 @@ class SequelizeOperate {
        this.application = application;
        this ._db = null;
        this.init();
+
     }
     init(){
         
     }
     update(...params){
         let {_db} = this;
+        
         return _db.update(...params)
+        
     }
-    define(name,option){
-        this ._db = sequeslize.define(name,option);
+    define(name,...params){
+        this ._db = sequeslize.define(name,...params);
     }
     sync(...params){
         let {_db} = this;
@@ -27,7 +30,7 @@ class SequelizeOperate {
     }
     find(...params){
         let {_db} = this;
-        console.log({_db});
+        //console.log({_db});
         return _db.findAll(...params)
     }
     findAll(...params){
@@ -43,6 +46,10 @@ class SequelizeOperate {
             ],
             ...params
         })*/
+    }
+    delete(...params){
+        let {_db} = this;
+        return _db.destroy(...params);
     }
     //执行查询命令
     query(...params){

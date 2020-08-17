@@ -45,6 +45,13 @@ class usercontroller extends Controller {
             })
         }
     }
+    async removeAccount(){
+        let {
+            userid
+        } = this.request.body;
+        await this.services.users.removeAccount({userid});
+        this.send(1);
+    }
     async addaccount (){
         let {
             username,

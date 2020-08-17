@@ -1,26 +1,57 @@
+const checkLogIn = async (ctx,next)=>{
+    let userid = ctx.cookies.get('userid_remote');
+    if(!userid)  {
+        //console.log(12312312312);
+        //console.log(ctx.plugins);
+        ctx.plugins.sendresult({
+            code:-1,
+            data:null,
+            msg:"nologin"
+        });
+        return;
+    }else{
+        await next();
+    }   
+    
+}
 module.exports = (router,app)=>{
     //console.log(router,app)
     let {
         index,
         user,
         projects,
-        report
+        report,
+        proxy
     } = app.controllers;
+
     const vpath = "";
     router.get(vpath+'/test',index.start);
     router.post(vpath+"/pm/login",user.login);
     router.post(vpath+"/pm/logout",user.logout);
-    router.post(vpath+"/pm/projectlist",projects.list);
-    router.post(vpath+"/pm/projecttypelist",projects.typelist);
-    router.post(vpath+"/pm/addaccount",user.addaccount);
-    router.post(vpath+"/pm/projectinfo",projects.findProject);
+    router.post(vpath+"/pm/projectlist",checkLogIn,projects.list);
+    router.post(vpath+"/pm/projecttypelist",checkLogIn,projects.typelist);
+    router.post(vpath+"/pm/addaccount",checkLogIn,user.addaccount);
+    router.post(vpath+"/pm/projectinfo",checkLogIn,projects.findProject);
 
-    router.post(vpath+"/pm/addproject",projects.addProject);
-    router.post(vpath+"/pm/getmocklist",projects.getmocklist);
-    router.post(vpath+"/pm/getmockdetails",projects.getmockdetails)
-    router.post(vpath+"/pm/addmock",projects.addmock)
-    router.post(vpath+"/report/errormini",report.reportMini);
-    router.post(vpath+"/report/errormini/get",report.getReportMini);
+    router.post(vpath+"/pm/addproject",checkLogIn,projects.addProject);
+    router.post(vpath+"/pm/getmocklist",checkLogIn,projects.getmocklist);
+    router.post(vpath+"/pm/getmockdetails",checkLogIn,projects.getmockdetails);
+    router.post(vpath+"/pm/updateinterface",checkLogIn,projects.updateinterface);
+    router.post(vpath+"/pm/addmock",checkLogIn,projects.addmock);
+    //删除用户
+    router.post(vpath+"/pm/removeaccount",checkLogIn,user.removeAccount);
+    //上传报错
+    router.post(vpath+"/report/error/set",report.report);
+    //获取报错信息
+    router.post(vpath+"/report/error/get",report.getReport);
+
+    router.get(vpath+"/api/:linklink",proxy.apiUse);
+    router.post(vpath+"/api/:linklink",proxy.apiUse);
+    
+    //
+
+
+   //router.get(vpath+"/report/addreport")
     /*router.get(vpath+'/test',index.start);
     router.get(vpath+'/soproxy/test',index.start);
     router.post(vpath+'/upload',index.upload);

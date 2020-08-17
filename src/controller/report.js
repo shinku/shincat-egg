@@ -1,7 +1,8 @@
 const Controller = require('../core/controller');
+const {v4 : uuid4}  =require('uuid'); 
 class Report extends Controller{
     //记录微信小程序报错
-    async reportMini(){
+    async report(){
         let {
             app ,
             context,
@@ -10,8 +11,19 @@ class Report extends Controller{
         let {
             msg,
             projectid,
-            appversion
+            appversion,
+            errormessage,
+            line,
+            col,
+            error
         } = this.request.body;
+        
+        let {header} = this.request;
+       
+        let ua = header['user-agent'];
+
+        let ip = header['x-real-ip'];
+        let url = header['origin'];
         if(!msg || !projectid || !appversion){
             this.send({
                 code:0,
@@ -20,6 +32,7 @@ class Report extends Controller{
             return;
         }
         try{
+           
             //先判断project 是否存在
             let res = await services.projects.infoProject(
                 projectid
@@ -33,10 +46,28 @@ class Report extends Controller{
             }
             //return;
             //console.log(services.projectError);
+            let sequelize = this.plugins.sequelize.sequelize;
+            let transaction = await  sequelize.transaction();
+
+            let msgdata = {
+                msg,
+                errormessage,
+                error
+            }
+            let errormessageid = uuid4();
+            let textfield = services.textfield;
+            await textfield.insert({
+                pid:errormessageid,
+                type:'textError',
+                text:JSON.stringify(msgdata),
+            })
             await services.projectError.insert({
                 projectid,
-                msg,
-                appversion
+                errormessageid,
+                appversion,
+                line,
+                col,
+                ua,ip,url
             });
 
             this.send(1);
@@ -47,21 +78,68 @@ class Report extends Controller{
        
         
     };
-    async getReportMini(){
+    async getReport(){
         let {
             app ,
             context,
             services
         } = this;
-        let {projectid} = this.request.body;
+        let {projectid,pageNumber,count,search} = this.request.body;
+        pageNumber = pageNumber  || 0;
+        count = count || 20; 
+        if(search){
+            //如果存在search 字段，则模糊搜索错误日志
+        }
+        let totalnum = await services.projectError.table.count(
+            {
+                where:{
+                    projectid
+                },
+                
+            }
+        );
         
         let result = await services.projectError.getInfo({
-            projectid
+            projectid,pageNumber,count
         });
+        let sendresult = 
+        result[0].map(item=>{
+            //console.log(item)
+            let rest = {};
+            try{
+                
+                rest = JSON.parse(item.text);
+                console.log({dd})
+            }
+            catch(e){
+               
+                var dd = item.text;
+                rest = {
+                    msg:dd
+                }
+            }
+           
+            return {
+                projectid:item.projectid,
+                appversion:item.appversion,
+                url:item.url,
+                ua:item.ua, 
+                browser:item.browser,
+                ip:item.ip,
+                line:item.line,
+                col:item.col,
+                createdAt:item.createdAt,
+                ...rest
+
+            }
+        })
         this.send({
             code:1,
-            data:result
+            data:{
+                pagetotal:totalnum,
+                list:sendresult
+            }
         })
-    }
+    };
 }
 module.exports = Report;

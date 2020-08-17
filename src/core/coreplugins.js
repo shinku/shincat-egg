@@ -44,8 +44,10 @@ module.exports =(app)=>{
     //context 存储 context 插件的引用
     const context = [...corePlugins.context,...morePlugins.context];
     //let {applications,context}  = loadplugin(app,'plugins');
+    console.log('core plugins installing');
     server.use(async (ctx,next)=>{
         ////此处增加ctx 的插件挂载s
+        console.log('挂载context 插件')
         ctx.plugins = {"v":"1.0.0"}
         context.forEach((_item)=>{
                 let {name,content}  = _item;

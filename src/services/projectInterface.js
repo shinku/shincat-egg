@@ -8,28 +8,60 @@ class ProjectsInterface extends ADbService{
     insert({projectid,
         contenttype,
         url,
-        response,
-        description,interfaceid},...params){
+        responseid,
+        responseexplainid,
+        method,
+        descriptionid,interfaceid,},...params){
         return this.table.create({
             projectid,
             contenttype,
             url,
-            response,
-            description,
+            responseid,
+            responseexplainid,
+            method,
+            descriptionid,
             interfaceid
         },...params)
     }
+    update({
+        contenttype,
+        url,
+        //responseid,
+        //responseexplainid,
+        method,
+        //descriptionid,
+        interfaceid},...params){
+            /*return this.table.update(tabledata,{where:{
+                interfaceid:interfaceid
+            }},...params)*/
+            let sql = `
+            UPDATE interfaces_projects SET contenttype='${contenttype}',url='${url}',
+            method='${method}',updatedAt=NOW() WHERE interfaceid = '${interfaceid}' and isdel = 0`;
+          
+            return this.table.query(sql,...params);
+
+    }
+    info({projectid}){
+        return this.table.find({
+            where:{
+                projectid,
+                isdel:0
+            }
+        });
+    }
     count ({projectid}){
         return this.table.count({
-            where:{projectid}
+            where:{projectid,
+                isdel:0}
         });
     }
     getList(...params){
-        console.log({
-            ...params[0]
-        })
         return this.table.findAll({
             ...params[0]
+        },{
+            where:{
+                isdel:0
+            }
         });
     }
     //登录

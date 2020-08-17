@@ -2,7 +2,7 @@
   "name": "mock",
   "version": "1.0.0",
   "description": "日常项目mock 平台",
-  "main": "index.js",
+  "main": "app.js",
   "virturlpath": "soproxy",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

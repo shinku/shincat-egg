@@ -10,7 +10,10 @@ const loadMiddleWare = (_path)=>{
             let middleware = require(path.join(process.getRoot(),_path,_item));
             //默认plugin 以文件名的形式挂载在application 下面
             let middlewarename = _item.substr(0,_item.indexOf('.'))
-            return middleware;
+            return {
+                name:middlewarename,
+                middleware:middleware
+            };
         }
     });
     
@@ -20,18 +23,23 @@ module.exports = (application)=>{
     let coremiddlewares = loadMiddleWare('core/middleware');
     //项目中间件目录
     let projecrMiddleWare = loadMiddleWare('middleware');
-    let {server} = application;
+    let {server,config} = application;
+    //let {config} = application;
     projecrMiddleWare.forEach(_item=>{
-        
-        server.use(_item)
+        console.log({_item})
+        //return;
+        let {
+            name,
+            middleware
+        } = _item;
+        let middleConfig =  config[name];
+        //return;
+        server.use(middleware.call(null,middleConfig,application))
     })
     coremiddlewares.forEach(_item=>{
         //console.log({_item});
-        if(_item) _item.call(null,application);
+        if(_item && _item.middleware) _item.middleware.call(null,application);
     });
-    
-   
-   
     return {
         coremiddlewares,
         projecrMiddleWare
